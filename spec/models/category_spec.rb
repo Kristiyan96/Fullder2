@@ -5,27 +5,25 @@
 #
 #  id                  :integer          not null, primary key
 #  restaurant_id       :integer
-#  supercategory_id    :integer
 #  name                :string
-#  age_restriction     :boolean
 #  available_all_day   :boolean
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
 #  avatar_file_name    :string
 #  avatar_content_type :string
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
+#  index               :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #  slug                :string
 #
 # Indexes
 #
-#  index_categories_on_restaurant_id     (restaurant_id)
-#  index_categories_on_slug              (slug) UNIQUE
-#  index_categories_on_supercategory_id  (supercategory_id)
+#  index_categories_on_restaurant_id           (restaurant_id)
+#  index_categories_on_restaurant_id_and_slug  (restaurant_id,slug) UNIQUE
 #
 # Foreign Keys
 #
-#  fk_rails_ec0260600b  (restaurant_id => restaurants.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
 require 'rails_helper'

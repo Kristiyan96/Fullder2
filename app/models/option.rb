@@ -5,6 +5,7 @@
 #
 #  id         :integer          not null, primary key
 #  group_id   :integer
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  price      :decimal(, )      default(0.0), not null
@@ -15,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_8caa9b444d  (group_id => groups.id)
+#  fk_rails_...  (group_id => groups.id)
 #
 
 class Option < ApplicationRecord

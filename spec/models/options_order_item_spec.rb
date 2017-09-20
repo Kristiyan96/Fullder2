@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_6d773cd5f7  (option_id => options.id)
-#  fk_rails_f40f61ef84  (order_item_id => order_items.id)
+#  fk_rails_...  (option_id => options.id)
+#  fk_rails_...  (order_item_id => order_items.id)
 #
 
 require 'rails_helper'

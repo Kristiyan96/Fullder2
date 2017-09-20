@@ -62,16 +62,13 @@ en:
     report-problem: Report a problem
     contacts: Contacts
   order:
-    demands-placeholder: "Any demands? Please, be concise."
-    add-to-cart: "Add to Cart"
+    add-to-cart: "Add"
     choose-table: "Your table code"
     choose-address: Or select an address for delivery
     table: Table
-    delivery: Delivery
     product: product
     price: price
     qty: qty
-    order-from: Order from
   navbar:
     home: "Home"
     manage: "Manage"

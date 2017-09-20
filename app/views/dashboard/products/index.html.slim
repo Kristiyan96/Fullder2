@@ -1,26 +1,23 @@
-= render 'layouts/dashboard/dashboard_navbar'
-.container.container-white.col-xs-12.col-sm-8.col-sm-offset-1.dashboard-main-window
-  h3 = t 'dashboard.product-index-title'
+h3 = t 'dashboard.product-index-title'
 
-  .search-form.col-xs-12
-    = form_tag dashboard_restaurant_products_path(@restaurant),
-               method: :get, remote: true do
-      .input-group
-        = text_field_tag :search, params[:search],
-                         class: "form-control input",
-                         placeholder: "Search by product name"
-        span.input-group-btn
-          = button_tag(type: 'submit', class: "btn btn-info btn") do
-            i class="glyphicon glyphicon-search"
+.search-form
+  = form_tag dashboard_restaurant_products_path(@restaurant),
+             method: :get, remote: true do
+    .input-group
+      = text_field_tag :search, params[:search],
+                       class: "form-control input",
+                       placeholder: "Search by product name"
+      span.input-group-btn
+        = button_tag(type: 'submit', class: "btn btn-info btn") do
+          i class="glyphicon glyphicon-search"
 
-  .search-results
-    = render partial: "search_results"
+.search-results
+  = render partial: "search_results"
 
-  .new-element.col-xs-6
-    = link_to (t 'button.add-product'), new_dashboard_restaurant_product_path(@restaurant), class: 'btn btn-primary btn-lg',
-      data: { target: '#element-form', toggle: 'modal' , remote: true}
-    #element-form.modal.fade aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-      .modal-dialog role="document"
-        .modal-content
-          | Please wait ...
-    = link_to " or upload your menu", dashboard_restaurant_menus_path(@restaurant)
+.new-element
+  = link_to (t 'button.add-product'), new_dashboard_restaurant_product_path(@restaurant), class: 'btn btn-primary btn-lg',
+    data: { target: '#element-form', toggle: 'modal' , remote: true}
+  #element-form.modal.fade aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+    .modal-dialog role="document"
+      .modal-content
+        | Please wait ...

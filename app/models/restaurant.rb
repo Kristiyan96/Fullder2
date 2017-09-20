@@ -4,63 +4,50 @@
 # Table name: restaurants
 #
 #  id                             :integer          not null, primary key
+#  user_id                        :integer
 #  name                           :string           not null
 #  address                        :string           not null
 #  wifipassword                   :string
-#  available_payment              :string
 #  phone_number                   :string
 #  country                        :string           default("en-GB")
 #  google_id                      :string
+#  code                           :string           not null
 #  latitude                       :float
 #  longitude                      :float
-#  sells_online                   :boolean
-#  created_at                     :datetime         not null
-#  updated_at                     :datetime         not null
 #  restaurant_avatar_file_name    :string
 #  restaurant_avatar_content_type :string
 #  restaurant_avatar_file_size    :integer
 #  restaurant_avatar_updated_at   :datetime
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
 #  slug                           :string
 #
 # Indexes
 #
-#  index_restaurants_on_slug  (slug) UNIQUE
+#  index_restaurants_on_slug     (slug) UNIQUE
+#  index_restaurants_on_user_id  (user_id)
 #
 
 class Restaurant < ApplicationRecord
   extend FriendlyId
-  friendly_id :slugged_candidates, use: :slugged
-
-  acts_as_taggable
+  belongs_to :user
 
   has_many :categories, dependent: :destroy
   has_many :products, dependent: :destroy
-  has_many :roles, dependent: :destroy
-  has_many :positions, dependent: :destroy
-  has_many :permission_roles, dependent: :destroy
   has_many :orders
   has_many :order_items, through: :orders
-  has_many :tables, dependent: :destroy
-  has_many :working_times, dependent: :destroy
-  has_many :images, dependent: :destroy
+  has_attached_file :restaurant_avatar, styles: { small: '300x300#', large: '1000x800' },
+                                        default_url: 'missing.png'
 
   validates :name, presence: true
   validates :address, presence: true
   validates :phone_number, presence: true
-
-  accepts_nested_attributes_for :working_times, allow_destroy: true
-  accepts_nested_attributes_for :images, reject_if: :all_blank,
-                                         allow_destroy: true
-
-  has_attached_file :restaurant_avatar, styles: { small: '300x300#', large: '1000x800' },
-                                        default_url: 'missing.png'
   validates_attachment_content_type :restaurant_avatar,
                                     content_type: /\Aimage\/.*\Z/
-
-  geocoded_by :address # can also be an IP address
-
   after_validation :geocode, if: :address_changed? # auto-fetch coordinates
-
+                                         
+  friendly_id :slugged_candidates, use: :slugged
+  geocoded_by :address # can also be an IP address
   acts_as_mappable :default_units => :kms,
                    :default_formula => :flat,
                    :lat_column_name => :latitude,
@@ -73,10 +60,6 @@ class Restaurant < ApplicationRecord
     end
   end
 
-  def working?
-    working_times.any?(&:active_now?)
-  end
-
   def slugged_candidates
     [
       :name,
@@ -86,14 +69,8 @@ class Restaurant < ApplicationRecord
     ]
   end
 
-  def load_working_hours(periods)
-    periods.each do |period|
-      work_time = self.working_times.new
-      work_time.update(from_time: Time.new.change(hour: period["open"]["time"].first(2), min: period["open"]["time"].last(2)))
-      work_time.update(from_day: period["open"]["day"])
-      work_time.update(to_time: Time.new.change(hour: period["close"]["time"].first(2), min: period["close"]["time"].last(2)))
-      work_time.update(to_day: period["close"]["day"])
-    end
+  def generate_code
+    self.code = rand(36**4).to_s(36)
+    generate_code if Restaurant.exists?(code: self.code)
   end
-  translates :description
 end

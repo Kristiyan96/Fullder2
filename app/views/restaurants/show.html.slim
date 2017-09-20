@@ -1,59 +1,9 @@
-.container-fluid.col-md-6.col-md-offset-1.home-page.container-white
-  #restaurant-avatar
-    = image_tag @restaurant.restaurant_avatar.url(:large)
-
-= render 'info'
-
-= render 'images'
-
-= render 'map'
+= image_tag @restaurant.restaurant_avatar.url(:large), class: "restaurant-avatar"
+.col-xs-8.col-xs-offset-2.restaurant-name.text-center = @restaurant.name
 
 = render 'menu'
-
-= render partial: 'layouts/cart/cart'
-
-javascript:
-  $(".menu-button").on('click tap', function() {
-    $(".home-page-3").addClass("hidden");
-    $(".home-page-2").addClass("hidden-xs hidden-sm");
-    $(".restaurant-menu").removeClass("hidden");
-    $('html, body').animate({
-        scrollTop: $(".restaurant-menu").offset().top
-    }, 500);
-  });
-
-  if ("#{params[:menu]}" == "open"){
-    $(".home-page-3").addClass("hidden");
-    $(".home-page-2").addClass("hidden-xs hidden-sm");
-    $(".restaurant-menu").removeClass("hidden");
-    $('html, body').animate({
-        scrollTop: $(".restaurant-menu").offset().top
-    }, 500);
-  }
+= render 'carts/cart'
 
 
-  setTimeout(function() {
-    handler = Gmaps.build('Google');
-    handler.buildMap({ 
-      provider: {
-        scrollwheel: false,
-        disableDefaultUI: true,
-        rotateControl: true,
-        streetViewControl: true,
-        streetViewControlOptions: true
-      }, 
-      internal: {id: 'map'}}, function(){
-        markers = handler.addMarkers(#{raw @hash.to_json});
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        handler.getMap().setZoom(17);
-      }
-    );
-    var clip = new Clipboard('.wifipass');
-    $('.wifipass').click(function(event){
-      $(".wifipass").effect( "highlight", {color:"#669966"}, 2000 );
-    });
-
-  }, 800);
 
 

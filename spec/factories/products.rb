@@ -8,17 +8,16 @@
 #  category_id          :integer
 #  name                 :string
 #  short_description    :string
+#  weight               :string
 #  description          :text
-#  price                :decimal(, )
-#  active               :boolean
+#  price                :decimal(, )      not null
 #  average_prepare_time :integer
-#  ready                :boolean
-#  created_at           :datetime
-#  updated_at           :datetime
 #  avatar_file_name     :string
 #  avatar_content_type  :string
 #  avatar_file_size     :integer
 #  avatar_updated_at    :datetime
+#  created_at           :datetime
+#  updated_at           :datetime
 #
 # Indexes
 #
@@ -27,8 +26,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_009fa2d872  (restaurant_id => restaurants.id)
-#  fk_rails_fb915499a4  (category_id => categories.id)
+#  fk_rails_...  (category_id => categories.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
 FactoryGirl.define do

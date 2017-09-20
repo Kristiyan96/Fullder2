@@ -14,12 +14,4 @@
           .panel-body
             = @product.description
 
-  -if @product.allergen_list.any?
-    .panel.panel-default.col-xs-12.ingredient-panel
-      .panel-heading data-toggle="collapse" href="#ingredients" data-target="#ingredients"
-        h4 = t 'product.ingredients'
-        #ingredients.panel-collapse
-          .panel-body
-            = @product.allergen_list.to_s
-
 = render partial: 'layouts/cart/cart'

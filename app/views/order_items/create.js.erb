@@ -1,8 +1,7 @@
 <% if current_order.errors.any? || @order_item.errors.any? %>
   $('.flash-container').html("<%= j render 'layouts/flash_messages' %>");
 <% else %>
-  $(".buy-button").html("<%= j render 'layouts/cart/buy_button' %>");
-  $(".mobile-cart").html("<a href='/cart'><div class='glyphicon glyphicon-shopping-cart'></div><%=formatted_price(current_order.subtotal, current_order.restaurant)%></a>");
+  $("#bill").html("<%= j render 'carts/buy_button' %>");
   $('#order-items').append("<%= j render 'carts/order_item', order_item: @order_item %>");
 <% end %>
 

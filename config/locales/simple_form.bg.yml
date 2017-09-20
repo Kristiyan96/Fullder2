@@ -11,7 +11,6 @@ bg:
         phone_number: 'Телефонен номер'
         locale: 'Място'
         language: Език / Language
-        allergen_list: 'Алергени, разделени със запетайки'
         age_restriction: 'Изисква проверка на възрастта?'
         available_all_day: 'Продава се постоянно?'
         role: 'Роля'
@@ -22,10 +21,6 @@ bg:
         ready: 'Готово ли е?(Може да бъде сервирано без подготовка)'
         category: 'Категория'
         restaurant_avatar: 'Главна снимка'
-        sells_online: 'Желаете ли да продавате през Fullder?'
-        accepts_reservations: 'Желаете ли да получавате резервации през Fullder?'
-        accepts_deliveries: 'Желаете ли да по получавате поръчки за доставки през Fullder?'
-        tag_list: 'Тагове, разделени със запетайки'
         permission_ids: 'Разрешения'
         number: 'Номер'
         wifipassword: Wifi парола за вашите клиенти
@@ -45,7 +40,6 @@ bg:
       defaults:
         current_password: сегащната парола е нужна, за да потвърдите промените
         phone_number: ще бъде ползван за резервации
-        allergen_list: разделени със запетаи
         address: за доставки
         name: ще се вижда от персонала на ресторантите, в които поръчвате
       user:

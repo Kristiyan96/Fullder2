@@ -1,4 +1,3 @@
-.col-xs-12 
-  b.col-xs-12.well.well-sm 
-    h3 = shorthand(category.name, 33) 
-  = render partial: "products/product_row", collection: category.products, as: :product
+.category-row.col-xs-12 style="background-image: url('#{category.avatar.url(:large)}')"
+  .category-name = "- #{category.name} -"
+= render partial: "products/product_row", collection: category.products, as: :product

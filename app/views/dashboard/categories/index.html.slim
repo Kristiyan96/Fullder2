@@ -1,26 +1,23 @@
-= render 'layouts/dashboard/dashboard_navbar'
-.container.container-white.col-xs-12.col-sm-8.col-sm-offset-1.dashboard-main-window
-  h3 = t 'dashboard.category-index-title'
+h3 = t 'dashboard.category-index-title'
 
-  .search-form
-    = form_tag dashboard_restaurant_categories_path(@restaurant),
-      method: 'get', remote: true do
-      .input-group
-        = text_field_tag :search, params[:search],
-                         class: "form-control input",
-                         placeholder: "Search by category name"
-        span.input-group-btn
-          = button_tag class: 'btn btn-info' do
-            i class="glyphicon glyphicon-search"
+.search-form
+  = form_tag dashboard_restaurant_categories_path(@restaurant),
+    method: 'get', remote: true do
+    .input-group
+      = text_field_tag :search, params[:search],
+                       class: "form-control input",
+                       placeholder: "Search by category name"
+      span.input-group-btn
+        = button_tag class: 'btn btn-info' do
+          i class="glyphicon glyphicon-search"
 
-  .search-results
-    = render partial: "search_results"
+.search-results
+  = render partial: "search_results"
 
-  .new-element
-    = link_to (t 'button.add-category'), new_dashboard_restaurant_category_path(@restaurant), class: 'btn btn-primary btn-lg',
-      data: { target: '#element-form', toggle: 'modal' , remote: true}
-    #element-form.modal.fade aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-      .modal-dialog role="document"
-        .modal-content
-          = t 'button.wait'
-    = link_to " or upload your menu", dashboard_restaurant_menus_path(@restaurant)
+.new-element
+  = link_to (t 'button.add-category'), new_dashboard_restaurant_category_path(@restaurant), class: 'btn btn-primary btn-lg',
+    data: { target: '#element-form', toggle: 'modal' , remote: true}
+  #element-form.modal.fade aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+    .modal-dialog role="document"
+      .modal-content
+        = t 'button.wait'

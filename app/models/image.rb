@@ -4,13 +4,13 @@
 # Table name: images
 #
 #  id               :integer          not null, primary key
+#  restaurant_id    :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  pic_file_name    :string
 #  pic_content_type :string
 #  pic_file_size    :integer
 #  pic_updated_at   :datetime
-#  restaurant_id    :integer
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_2b7d98327c  (restaurant_id => restaurants.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
 class Image < ApplicationRecord

@@ -16,7 +16,7 @@ en-US:
     cancel-account: Cancel account 
   order:
     demands-placeholder: "Any demands? Please, be concise."
-    add-to-cart: "Add to Cart"
+    add-to-cart: "Add"
     choose-table: "Your table code"
   navbar:
     home: "Home"

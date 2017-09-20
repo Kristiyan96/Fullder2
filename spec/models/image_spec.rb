@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_2b7d98327c  (restaurant_id => restaurants.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
 require 'rails_helper'

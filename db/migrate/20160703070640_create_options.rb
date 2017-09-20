@@ -2,8 +2,9 @@
 class CreateOptions < ActiveRecord::Migration[5.0]
   def up
     create_table :options do |t|
-      t.references :group,           foreign_key: true
+      t.references :group,  foreign_key: true
       t.string :name
+      t.decimal :price,     default: 0.0, null: false
 
       t.timestamps
     end

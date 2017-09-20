@@ -6,7 +6,7 @@
 #  id          :integer          not null, primary key
 #  product_id  :integer
 #  name        :string
-#  price       :decimal(, )
+#  price       :decimal(, )      default(0.0)
 #  description :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -17,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_d93d1762ca  (product_id => products.id)
+#  fk_rails_...  (product_id => products.id)
 #
 
 require 'rails_helper'

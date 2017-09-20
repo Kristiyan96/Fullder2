@@ -35,11 +35,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.boolean :admin, default: false
       t.string :name
       t.string :phone_number
-      t.string :address
       t.string :locale, default: 'en'
       t.string :provider # for omniauth
       t.string :uid # for omniauth
-      t.integer :rating, default: 0
 
       t.timestamps null: false
     end

@@ -9,11 +9,6 @@ class CreateOrderItems < ActiveRecord::Migration
       t.decimal :unit_price
       t.integer :quantity
       t.decimal :total_price
-      t.string :demands
-      t.string :status
-      t.datetime :received_at
-      t.datetime :ready_at
-      t.datetime :delivered_at
 
       t.timestamps               null: false
     end

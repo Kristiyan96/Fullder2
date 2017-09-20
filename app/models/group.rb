@@ -6,6 +6,7 @@
 #  id         :integer          not null, primary key
 #  product_id :integer
 #  maximum    :integer
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -15,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_865905e981  (product_id => products.id)
+#  fk_rails_...  (product_id => products.id)
 #
 
 class Group < ApplicationRecord

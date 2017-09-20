@@ -21,13 +21,11 @@
 #  admin                  :boolean          default(FALSE)
 #  name                   :string
 #  phone_number           :string
-#  address                :string
 #  locale                 :string           default("en")
 #  provider               :string
 #  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  rating                 :integer          default(0)
 #
 # Indexes
 #
@@ -36,21 +34,14 @@
 #
 
 class User < ApplicationRecord
-  has_many :positions
-  has_many :roles, through: :positions
   has_many :orders
-  has_many :tables
+  has_many :restaurants
 
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [:google_oauth2, :facebook, :twitter]
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false }
-
-  acts_as_taggable
-  acts_as_taggable_on :allergens
 
   def self.from_omniauth(token)
     user = User.find_by(uid: token['uid'])
@@ -60,24 +51,12 @@ class User < ApplicationRecord
         provider: token['provider'],
         uid: token['uid'],
         email: token.info['email'] || SecureRandom.hex(5) + "@changemeplease.com",
+        confirmed_at: Date.current,
         password: Devise.friendly_token[0, 20]
       )
-      user.skip_confirmation! unless token.info['email'].nil?
       user.save!
     end
     user
-  end
-
-  def trustworthy?
-    rating>=5
-  end
-
-  def add_rating
-    self.update(rating: rating + 1)
-  end
-
-  def reset_rating
-    self.update(rating: 0)
   end
 
 end

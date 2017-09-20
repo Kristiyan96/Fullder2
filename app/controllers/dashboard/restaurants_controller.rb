@@ -2,7 +2,7 @@
 class Dashboard::RestaurantsController < ApplicationController
   load_and_authorize_resource find_by: :slug
   before_action :authenticate_user!
-  before_action :set_restaurant, except: [:show, :new, :edit, :update, :import]
+  before_action :set_restaurant, only: [:show, :edit, :update, :import]
 
   def show
   end
@@ -16,6 +16,8 @@ class Dashboard::RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.generate_code
+    debugger
 
     respond_to do |format|
       if @restaurant.save
@@ -61,12 +63,6 @@ class Dashboard::RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :tag_list, :country, :address, :description, :phone_number, :wifipassword,:avg_meal_price, 
-                                      :staff_count, :facebook_link,
-                                      :twitter_link, :available_payment,
-                                      :sells_online,
-                                      :restaurant_avatar, language_ids: [],
-                                      working_times_attributes: [:id, :from_time, :to_time, :from_day, :to_day, :restaurant_id, :_destroy],
-                                      images_attributes: [:id, :pic, :restaurant_id, :_destroy])
+    params.require(:restaurant).permit(:name, :country, :address, :phone_number, :wifipassword, :avg_meal_price, :restaurant_avatar)
   end
 end

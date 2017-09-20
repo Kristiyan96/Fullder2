@@ -13,7 +13,6 @@ en:
         phone_number: 'Phone number'
         locale: 'Country'
         language: Language
-        allergen_list: 'Allergens'
         age_restriction: 'Age restriction'
         available_all_day: 'Available all day'
         role: 'Role'
@@ -48,7 +47,6 @@ en:
       defaults:
         current_password: we need your current password to confirm your changes
         phone_number: will be used for reservations
-        allergen_list: separated by commas
         address: for home delivery
       user:
         edit:

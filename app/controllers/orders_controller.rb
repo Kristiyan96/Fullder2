@@ -1,18 +1,7 @@
 class OrdersController < ApplicationController
-  include OrdersHelper
   load_and_authorize_resource
   before_action :authenticate_user!
-  before_action :set_restaurant, only: [:new, :pay]
-  before_action :delete_unpaid_orders, only: [:create]
-
-  def index
-    @orders = current_user.orders.order('updated_at DESC').page(params[:page]).per(20)
-    add_breadcrumb "orders", orders_path, title: "Back to the orders"
-  end
-
-  def show
-    @order = current_user.orders.find(params[:id])
-  end
+  before_action :set_restaurant, only: [:new]
 
   def new
     @order = Order.new
@@ -22,13 +11,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    table = Table.find_by(code: order_params[:address])
-
-    if table
+    restaurant = Restaurant.find_by(code: order_params[:restaurant_id])
+    if restaurant
       @order = current_user.orders.new(order_params)
-      @order.table_id = table.id
-      @order.restaurant_id = table.restaurant_id
-      @order.table_number = table.number
+      @order.restaurant_id = restaurant.id
 
       respond_to do |format|
         if @order.save
@@ -68,31 +54,12 @@ class OrdersController < ApplicationController
     @order_items = current_order.order_items.order('updated_at')
   end
 
-  def pay
-    respond_to do |format|
-      if current_order.fulfils_requirements?
-        @restaurant = current_order.restaurant
-        current_order.update(payed: true)
-        current_order.order_items.update_all(status: 'unready', received_at: Time.current)
-        session[:order_id] = nil
-        flash[:success] = "Order sent to restaurant."
-        format.js { render 'orders/pay.js.erb'}
-        format.html { redirect_to restaurant_path(@restaurant) }
-      else
-        flash[:error] = "The requirements are not met."
-        format.js { }
-        format.html { redirect_to @restaurant}
-      end
-    end
-
-  end
-
   private
   def set_restaurant
     @restaurant = Restaurant.find(session[:restaurant_id])
   end
 
   def order_params
-    params.require(:order).permit(:address)
+    params.require(:order).permit(:restaurant_id)
   end
 end

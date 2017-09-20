@@ -5,16 +5,16 @@
 #
 #  id                  :integer          not null, primary key
 #  restaurant_id       :integer
-#  age_restriction     :boolean
+#  name                :string
 #  available_all_day   :boolean
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
 #  avatar_file_name    :string
 #  avatar_content_type :string
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
-#  slug                :string
 #  index               :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  slug                :string
 #
 # Indexes
 #
@@ -23,7 +23,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_ec0260600b  (restaurant_id => restaurants.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
 class Category < ApplicationRecord
@@ -34,7 +34,7 @@ class Category < ApplicationRecord
 
   has_many :products
 
-  has_attached_file :avatar, styles: { small: '140x140#' }, default_url: '/images/:style/missing.png'
+  has_attached_file :avatar, styles: { small: '140x140#', large: '800x800' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   validates :name, presence: true 

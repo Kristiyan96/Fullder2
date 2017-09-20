@@ -1,0 +1,55 @@
+#wrapper
+  #sidebar-wrapper
+    ul
+      li.sidebar-brand
+        = link_to "Fullder", root_path
+        button#main_icon.c-hamburger.c-hamburger--htla
+          span toggle menu
+
+    ul
+      - if current_user && controller_path.start_with?('dashboard')
+        li
+          = link_to dashboard_restaurant_path(@restaurant) do
+            = "#{t 'navbar.home'}"
+            i.fa.fa-home.button-icon aria-hidden="true"
+        li
+          = link_to dashboard_restaurant_products_path(@restaurant) do
+            = "#{t 'navbar.products'}"
+            i.fa.fa-cutlery.button-icon aria-hidden="true"
+        li
+          = link_to dashboard_restaurant_categories_path(@restaurant) do
+            = "#{t 'navbar.categories'}"
+            i.fa.fa-filter.button-icon aria-hidden="true"        
+        li
+          = link_to edit_dashboard_restaurant_path(@restaurant) do
+            = "#{t 'navbar.categories'}"
+            i.fa.fa-cog.button-icon aria-hidden="true"
+
+      - elsif current_user && @restaurant && current_order.restaurant == @restaurant
+        #bill
+          = render partial: 'carts/buy_button'
+        #order-items
+          = render partial: 'carts/order_item', collection: current_order.order_items.order('created_at'), as: :order_item
+
+      - elsif current_user
+        - if current_user.restaurants.any?
+          li
+            = link_to dashboard_restaurant_path(current_user.restaurants.first) do
+              = "#{t 'navbar.dashboard'}"
+              i.fa.fa-cogs.button-icon aria-hidden="true"
+        li
+          = link_to edit_user_registration_path do
+            = " #{t 'navbar.profile'}"
+            i.fa.fa-user.button-icon aria-hidden="true"
+        li
+          = link_to destroy_user_session_path, method: :delete
+            = " #{t 'navbar.logout'}"
+            i.fa.fa-sign-out.button-icon aira-hidden="true"
+      - else
+        li
+          = link_to new_user_session_path
+            = " #{t 'navbar.enter'}"
+            i.fa.fa-sign-in.button-icon aira-hidden="true"
+    
+
+

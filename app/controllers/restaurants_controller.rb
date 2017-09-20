@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user!, only: [:favorite]
-  before_action :set_restaurant, only: [:show, :favorite]
+  before_action :set_restaurant, only: [:show]
 
   def index
-    # Checking if called by pagination or by a new search
     @nextpage = params[:scrolling]
     params[:scrolling] = false
     
@@ -14,8 +12,6 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.search(params[:search])
     @restaurants = @restaurants.by_distance(origin: [@latitude, @longitude]) if @latitude && @longitude
     @restaurants = @restaurants.page(params[:page]).per(12)
-
-    ahoy.track "Viewed restaurants index"
 
     respond_to do |format|
       format.html
@@ -33,9 +29,6 @@ class RestaurantsController < ApplicationController
 
     @categories = @restaurant.categories.order(:index)
     @order_item = OrderItem.new
-
-    add_breadcrumb @restaurant.name, restaurant_path(@restaurant), title: "Back to the restaurant"
-    ahoy.track "Viewed restaurant home page", restaurant_id: @restaurant.id
 
     respond_to do |format|
       format.html

@@ -11,11 +11,4 @@ module ProductsHelper
       formatted_price(product.price, @restaurant)
     end
   end
-
-  def common_alergens(prod, user)
-    if prod && user 
-      allergens = prod.allergen_list & user.allergen_list
-      (t 'product.contains').to_s + allergens.to_sentence if allergens.any?
-    end
-  end
 end

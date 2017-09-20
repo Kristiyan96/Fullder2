@@ -21,7 +21,6 @@
 #  admin                  :boolean          default(FALSE)
 #  name                   :string
 #  phone_number           :string
-#  address                :string
 #  locale                 :string           default("en")
 #  provider               :string
 #  uid                    :string

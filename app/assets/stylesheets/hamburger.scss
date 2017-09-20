@@ -30,6 +30,14 @@
   background: white;
 }
 
+@media (min-width:767px) {
+  .c-hamburger span {
+    width: 40px;
+    top: 40px;
+    left: 15px;
+  }
+}
+
 .c-hamburger span::before,
 .c-hamburger span::after {
   position: absolute;

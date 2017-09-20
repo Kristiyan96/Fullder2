@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.3.0'
+ruby '2.4.1'
 
 gem 'rails', '>= 5.0.0.rc2', '< 5.1'
 # Use sqlite3 as the database for Active Record
@@ -65,8 +65,6 @@ gem 'rails-i18n', '~> 5.0.0'
 gem 'globalize', github: 'globalize/globalize'
 # This is needed by globalize
 gem 'activemodel-serializers-xml'
-# Model tags
-gem 'acts-as-taggable-on', '~> 4.0'
 # Respond gem for different types of requests
 gem 'responders'
 # UI stuff
@@ -97,13 +95,6 @@ gem 'remotipart'
 gem 'google_places'
 # Requiring captcha on forms, human verification
 gem 'recaptcha', require: 'recaptcha/rails'
-# Annotate because it fails in production
-gem 'annotate'
-# Bread crumbs for site navigation
-gem 'breadcrumbs_on_rails'
-# Statistics gem
-gem 'ahoy_matey'
-
 
 group :development do
   gem 'spring'

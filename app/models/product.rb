@@ -6,17 +6,18 @@
 #  id                   :integer          not null, primary key
 #  restaurant_id        :integer
 #  category_id          :integer
+#  name                 :string
+#  short_description    :string
 #  weight               :string
+#  description          :text
 #  price                :decimal(, )      not null
-#  active               :boolean
 #  average_prepare_time :integer
-#  ready                :boolean
-#  created_at           :datetime
-#  updated_at           :datetime
 #  avatar_file_name     :string
 #  avatar_content_type  :string
 #  avatar_file_size     :integer
 #  avatar_updated_at    :datetime
+#  created_at           :datetime
+#  updated_at           :datetime
 #
 # Indexes
 #
@@ -25,8 +26,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_009fa2d872  (restaurant_id => restaurants.id)
-#  fk_rails_fb915499a4  (category_id => categories.id)
+#  fk_rails_...  (category_id => categories.id)
+#  fk_rails_...  (restaurant_id => restaurants.id)
 #
 
 class Product < ApplicationRecord
@@ -41,17 +42,11 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :sizes, allow_destroy: true
   accepts_nested_attributes_for :groups, allow_destroy: true
 
-  default_scope { where(active: true) }
-
   has_attached_file :avatar, styles: { small: '140x140#', large: '250x250#' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   validates :name, presence: true
   validates :category_id, presence: true
-  # validates :short_description, presence: true, length: { maximum: 130 }
   validates :price, presence: true
-
-  acts_as_taggable
-  acts_as_taggable_on :allergens
 
   translates :name, :short_description, :description
 
@@ -61,9 +56,5 @@ class Product < ApplicationRecord
       where('products.name ilike ?',
             keyword)
     end
-  end
-
-  def self.import!(restaurant_id, file_name)
-    ProductImporter.import!(restaurant_id, file_name)
   end
 end

@@ -7,12 +7,10 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     meta[name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"]
     = csrf_meta_tags
-    = render 'layouts/header'
+    / = render 'layouts/sidebar_left'
   body class="#{controller_name} #{action_name}"
     .flash-container
       = render 'layouts/flash_messages'
     = yield
-    .clear
-  footer
-    = render 'layouts/footer'
+
 

@@ -1,0 +1,4 @@
+li.bill
+  = link_to root_path do
+    .item-name.col-xs-9 Total :
+    .item-price.col-xs-3 = formatted_price(current_order.subtotal, current_order.restaurant)

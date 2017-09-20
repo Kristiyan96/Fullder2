@@ -8,6 +8,7 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  price      :decimal(, )      default(0.0), not null
 #
 # Indexes
 #
@@ -15,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_8caa9b444d  (group_id => groups.id)
+#  fk_rails_...  (group_id => groups.id)
 #
 
 require 'rails_helper'

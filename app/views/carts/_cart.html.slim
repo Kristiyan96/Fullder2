@@ -1,0 +1,18 @@
+.cd-cart-container.empty
+  a.cd-cart-trigger href="#0" 
+    | Cart
+  .cd-cart
+    .wrapper
+      header
+        h2 Cart
+        span.undo
+          | Item removed.
+          a href="#0"  Undo
+      .body
+        ul
+          = render partial: 'carts/order_item', collection: current_order.order_items.order('created_at'), as: :order_item
+      footer
+        a.checkout href="#0" 
+          em
+            | Checkout - $
+            span 0

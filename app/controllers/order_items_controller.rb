@@ -8,13 +8,12 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new(order_item_params)
     @order_item.restaurant_id = @restaurant.id
     respond_to do |format|
-      if order_exists?
-        add_item
-        format.js
-      else
-        session[:order_item] = @order_item
-        redirect_to new_order_path and return
+      unless order_exists?
+        new_order = Order.create(user_id: current_user.id, restaurant_id: @restaurant.id)
+        session[:order_id] = new_order.id
       end
+      add_item
+      format.js
     end
   end
 
@@ -44,7 +43,7 @@ class OrderItemsController < ApplicationController
   private
 
   def order_item_params
-    params.require(:order_item).permit(:quantity, :product_id, :size_id, :demands, :restaurant_id,
+    params.require(:order_item).permit(:quantity, :product_id, :size_id, :restaurant_id,
                                        option_ids: [])
   end
 end

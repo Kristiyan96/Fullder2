@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_865905e981  (product_id => products.id)
+#  fk_rails_...  (product_id => products.id)
 #
 
 require 'rails_helper'
